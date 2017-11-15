@@ -5,6 +5,7 @@ NumPy/SciPyの利用
 １章を参考にanacondaを使ってPythonをインストールした人は既にNumPyは入っていると思います．
 そこで，まずはNumPyの有無を確認しましょう．
 Pythonコンソールで
+
 .. ipython:: python
   import numpy
   import scipy
