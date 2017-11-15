@@ -1,31 +1,37 @@
-========
-タイトル
-========
+NumPy/SciPyの利用
+===============================
 
-セクション 1
-============
+　それでは早速，NumPy/SciPyを使っていきましょう．
+１章を参考にanacondaを使ってPythonをインストールした人は既にNumPyは入っていると思います．
+そこで，まずはNumPyの有無を確認しましょう．
+Pythonコンソールで
+.. ipython:: python
+    import numpy
+    import scipy
 
-xxx
+と打ってみてエラーがなければ無事にインストールされています．
+”No Module Named numpy”のようなエラーが出る場合はターミナルで以下のコマンドを入れてインストールして下さい．
 
-セクション 2
-============
+.. code-block:: bash
+    pip install numpy
+    pip install scipy
 
-xxx
+　NumPyのインストールが完了したら，プログラム中で使用するためにimportします．
+外部パッケージの使用に関する詳細は２章を参照してください．
+NumPyをimportするには，プログラム冒頭で以下のように宣言します．
 
-サブセクション C
-----------------
+.. ipython:: python
+    import numpy
+    from numpy import *
 
-xxx
+“from モジュール名 import *”というコードは，既にスコープに存在する変数を知らない間に上書きしてしまう恐れがあります．
+本章ではNumPyの呼び出しは
+.. ipython:: python
+    import numpy as np
 
-.. code-block:: python
+ に統一してあります．
+読者の皆さんにもnp.関数名での呼び出し記法を強く推奨します．
+import numpy as np
+from numpy import array
+import scipy as sp
 
-  import numpy as np
-
-  def get_xy(r, theta):
-      """
-      Returns x, y values from polar coordinate variable r (radial coordinate)
-      and theta (angular coordinate).
-      """
-      x = r * np.cos(theta)
-      y = r * np.sin(theta)
-      return x, y
