@@ -12,8 +12,9 @@ Pythonコンソールで
 
   import scipy
 
-と打ってみてエラーがなければ無事にインストールされています．
-”No Module Named numpy”のようなエラーが出る場合はターミナルで以下のコマンドを入れてインストールして下さい．
+| と打ってみてエラーがなければ無事にインストールされています．
+| ``No Module Named numpy``
+| ようなエラーが出る場合はターミナルで以下のコマンドを入れてインストールして下さい．
 
 .. code-block:: bash
 
@@ -38,15 +39,7 @@ from モジュール名 import *
 .. ipython:: python
 
   import numpy as np
+  import scipy as sp
 
 に統一してあります．
 読者の皆さんにもnp.関数名での呼び出し記法を強く推奨します．
-
-.. ipython:: python
-
-  import numpy as np
-
-  from numpy import array
-
-  import scipy as sp
-

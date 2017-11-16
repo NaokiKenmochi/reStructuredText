@@ -13,6 +13,8 @@ Welcome to JPFR_NumPy_SciPy's documentation!
    preface
    introduction
    numpy_scipy
+   numpy_scipy2
+   numpy_scipy3
    summary
 
 
