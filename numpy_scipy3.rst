@@ -67,6 +67,8 @@ np.loadtxt, np.savetxt関数の特徴
 .. ipython:: python
 
     d = np.loadtxt('array3.txt')
+    c
+    d
 
 次は，区切り文字を","にして保存してみます．
 
@@ -74,7 +76,23 @@ np.loadtxt, np.savetxt関数の特徴
 
     np.savetxt('array4.txt', c, delimiter=',')
 
-genfromtxtはデータファイルに数値と文字列の両方が入っている場合に利用すると便利です．
+保存されたファイルを開いて確認してみましょう．
+
+.. include:: array4.txt
+
+先に保存したarray3.txtは以下のようになっています．
+
+.. include:: array3.txt
+
+こちらは，区切り文字を指定していないので，デフォルト設定のスペースでデータが区切られています．
+なお，","で区切ったテキストファイルを読み込むにはdelimiter=','と指定しないといけません．
+
+.. ipython:: python
+    
+    e = np.loadtxt('array4.txt', delimiter=',')
+    e
+
+.. genfromtxtはデータファイルに数値と文字列の両方が入っている場合に利用すると便利です．
 以下にnumpyを用いたファイル入出力を表にまとめておきます．
 
 +------------------+----------+--------+--------+--------------+
