@@ -5,34 +5,75 @@ NumPyもファイルの読み書きをサポートしており，ファイル形
 
 バイナリ形式での読み書き
 --------------------------
-バイナリ形式の読み書きには，np.load, np.save, np.savezを使用します．
+バイナリ形式の読み書きには，np.load, np.save, np.savezを使い，以下のような特徴があります．
 
-np.load, np.save関数の特徴
-^^^^^^^^^^^^^^^^^^^^^^^^^^
 * ndarray配列をそのまま保存できる．３次元以上の配列も保存可能
 * 対応拡張子はpickle, npz, npy
 * 扱うファイル形式は他のアプリケーションとの互換性はほとんどない
-使用例
+
+np.load, np.save
+^^^^^^^^^^^^^^^^^^^^^^^^^^
+np.load()とnp.save()は効率的にndarrayを読み書きできます．
+デフォルト設定では非圧縮のバイナリ形式で保存され，拡張子は.npyになります．
+
+.. ipython:: python
+
+    a = np.arange(5)
+    np.save('array', a)
+
+このように，ファイルパスに拡張子を指定しない場合は，自動で.npyが付加されます．
+次に，作成したファイルを読み込んでみます．
+
+.. ipython:: python
+
+    np.load('array.npy')
 
 numpy.savez
 ^^^^^^^^^^^^^^^^^^^^^^^^^
 savez関数は，複数のndarrayをzip圧縮して保存することができます．
 個々のndarrayはキーワードを指定して区別します．
-savezの仕様例
+
+.. ipython:: python
+
+    b = np.array([[1, 2, 3], [4, 5, 6]])
+    np.savez('array2.npz', a=a, b2=b)   #bにb2という名前をつけて保存
+
 拡張子.npzのファイルはload関数で読み込みます．
 ndarrayを読み込むには，キーワードを指定します．
 この読み込みは遅延読み込みであり，データは参照された時点で初めてロードされます．
-loadの仕様例
+
+.. ipython:: python
+
+    arr = np.load('array2.npz')
+    arr['b2']
 
 テキスト形式での読み書き
 -------------------------
-Python以外の言語や，その他のソフトウェアで使用する場合など，テキスト形式での保存が便利です．numpyではテキスト形式での読み書きにloadtxt, savetxtを使用します．
+Python以外の言語や，その他のソフトウェアで使用する場合など，テキスト形式での保存が便利です．
+numpyではテキスト形式での読み書きにloadtxt, savetxtを使用します．
 
 np.loadtxt, np.savetxt関数の特徴
 ^^^^^^^^^^^^^^^^^^^^^^^^^^
-・他のアプリケーションと互換性のある.dat, .csv, .txt形式のファイルの読み書きができる
-・保存できる配列の次元は２次元まで
-使用例
+* 他のアプリケーションと互換性のある.dat, .csv, .txt形式のファイルの読み書きができる
+* 保存できる配列の次元は２次元まで
+
+.. ipython:: python
+
+    c = np.random.randn(4, 5)   #標準正規分布に従った乱数を２次元配列で生成
+    np.savetxt('array3.txt', c)
+
+保存したデータを読み込んでみます．
+
+.. ipython:: python
+
+    d = np.loadtxt('array3.txt')
+
+次は，区切り文字を","にして保存してみます．
+
+.. ipython:: python
+
+    np.savetxt('array4.txt', c, delimiter=',')
+
 genfromtxtはデータファイルに数値と文字列の両方が入っている場合に利用すると便利です．
 以下にnumpyを用いたファイル入出力を表にまとめておきます．
 
