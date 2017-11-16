@@ -16,6 +16,8 @@ Welcome to JPFR_NumPy_SciPy's documentation!
    numpy_scipy2
    numpy_scipy3
    numpy_scipy4
+   numpy_scipy5
+   numpy_scipy6
    summary
 
 
