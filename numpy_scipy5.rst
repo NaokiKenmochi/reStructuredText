@@ -22,7 +22,7 @@ for文を使って１から１億までの和を計算する（Python的な書�
     def test_for_loop():
         tick = time.time()
         s = 0
-        for i in range(1, 100000001):
+        for i in range(1, 100001):
             s += i
         print('Calculation result: %d' % s)
         tock = time.time()
@@ -36,7 +36,7 @@ for文を使って１から１億までの和を計算する（Python的な書�
     
     def test_sum():
         tick = time.time()
-        s = sum(range(1, 100000001))
+        s = sum(range(1, 100001))
         print('Calculation result: %d' % s)
         tock = time.time()
         print('Time of %s: %.06f[s]' % (sys._getframe().f_code.co_name, tock-tick))
@@ -48,7 +48,7 @@ NumPyを使い，1から1億が入った配列を用意し，その和を計算�
 
     def test_numpy_sum():
         tick = time.time()
-        a = np.arange(1, 100000001, dtype=np.int64)
+        a = np.arange(1, 100001, dtype=np.int64)
         print('Calculation result: %d' % a.sum())
         tock = time.time()
         print('Time of %s: %.06f[s]' % (sys._getframe().f_code.co_name, tock-tick))
