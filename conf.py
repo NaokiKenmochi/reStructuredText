@@ -172,3 +172,8 @@ extensions += [
                                                 'IPython.sphinxext.ipython_directive',
                                                           'IPython.sphinxext.ipython_console_highlighting']
 
+# 言語の設定
+language = 'ja'
+
+# LaTeX の docclass 設定
+latex_docclass = {'manual': 'jsbook'}

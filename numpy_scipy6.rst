@@ -20,6 +20,7 @@ SciPyパッケージのodeintモジュールを使うと１階の常微分方程
 
 .. literalinclude:: predator_prey.py
     :language: python
+    :linenos:
 
 .. image:: predator_prey.png
     

@@ -8,14 +8,24 @@ NumPyではndarrayで表現した行列に対して，行列の積，行列の�
 これには，線形代数分野の各種関数を提供するlinalgサブパッケージを用います．
 NumPyにもlinalgがありますが，SciPyのlinalgはこの機能をほとんどカバーし，かつそれ以外にも多くの機能を追加しています [#]_ ．
 ここでは，そのうち一部を紹介します [#]_ ．
-linalg.inv
-linalg.det
-linalg.norm
+
+.. ipython:: python
+
+    from scipy import linalg    #SciPyのlinalgサブパッケージをインポートする
+    import numpy as np
+
+    array = np.array([[1, 2], [3, 4]])
+    inv_array = linalg.inv(array)   #逆行列の計算
+    inv_array
+    det_array = linalg.det(array)   #行列式の計算
+    det_array
+    norm_array = linalg.norm(array) #ノルムの計算
+    norm_array
 
 ブロードキャスティング
 ------------------------
 +-*/等の四則演算や，ユニバーサル関数を使ってndarray同士の演算を行う際に，異なるサイズの２つのndarrayを使って計算を行わなければならない場合もあります．
-例えば，配列の要素同士の加算を行う時にそれぞれの配列の形状が合致していない場合があります．
+.. 例えば，配列の要素同士の加算を行う時にそれぞれの配列の形状が合致していない場合があります．
 そのような場合に，処理の効率化のためにNumPyが備える配列演算の拡張ルールであるブロードキャスティング(Broadcasting)により，配列の形状を合わせて効率的に処理を行うのが計算を行える場合があります．
 
 ブロードキャスティングのルール
@@ -32,16 +42,46 @@ linalg.norm
 .. ipython:: python
 
     a = np.array([1, 2, 3, 4])
+    a.shape #aの形状(shape)を確認する
     a + 1
 
 .. image:: broadcast1.png
     :alt: IMAGE
 
+.. ipython:: python
+
+    #1から12までの等差数列を作成し，形状を(4, 3)に変更する
+    b = np.arange(1, 13, 1).reshape((4, 3)) 
+    b
+
+    c = np.array([1, 2, 3])
+    c.shape #cの形状(shape)を確認する
+
+    b + c
+
 .. image:: broadcast2.png
     :alt: IMAGE
 
+.. ipython:: python
+
+    #1から4までの等差数列を作成し，形状を(4, 1)に変更する
+    d = np.array([1, 2, 3, 4]).reshape(4, 1)
+
+    d + c
+
 .. image:: broadcast3.png
     :alt: IMAGE
+
+.. ipython:: python
+
+    #1から24までの等差数列を作成し，形状を(2, 4, 3)に変更する
+    e = np.arange(1, 25, 1).reshape((2, 4, 3))
+    e
+
+    f = np.ones((4, 3)) #形状が(4, 3)ですべての要素が1の配列を作成する
+    f
+
+    e + f
 
 .. image:: broadcast4.png
     :alt: IMAGE
