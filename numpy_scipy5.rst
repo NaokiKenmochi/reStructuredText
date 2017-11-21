@@ -1,9 +1,11 @@
 NumPyによる計算高速化
 ========================
 
-Pythonは動的型付けを行う（実行時に型を決める言語）インタプリタであるため，柔軟で短いコードが書けたり，短時間で開発ができると言うメリットで十分かもしれませんが，やはり科学技術計算をしようとするならば高速な計算が望ましいです．
+Pythonは動的型付けを行う（実行時に型を決める言語）インタプリタであるため，柔軟で短いコードが書けたり，短時間で開発ができると言うメリットがあります．
+このメリットだけでも十分かもしれませんが，やはり科学技術計算をしようとするならば高速な計算が望ましいです．
 そこで，この節では高速な科学技術計算のためのテクニックを幾つか紹介します．
-　数値計算をする上でfor文による多重ループを使いたくなる事があるでしょう．
+
+数値計算をする上でfor文による多重ループを使いたくなる事があるでしょう．
 しかし，コンパイル言語ではないPythonでは，for文を用いると処理が非常に遅くなります．
 そこで，NumPyの組み込み関数(universal function)を活用します．
 ユニバーサル関数とは，ndarrayの全要素に対して，ブロードキャスティングにより要素ごとに演算処理を行い，結果をndarrayで返す関数です．
@@ -32,7 +34,7 @@ for文を使って１から１億までの和を計算する（Python的な書�
     def test_for_loop():
         tick = time.time()
         s = 0
-        for i in range(1, 100001):
+        for i in range(1, 100000001):
             s += i
         print('Calculation result: %d' % s)
         tock = time.time()
@@ -46,7 +48,7 @@ for文を使って１から１億までの和を計算する（Python的な書�
     
     def test_sum():
         tick = time.time()
-        s = sum(range(1, 100001))
+        s = sum(range(1, 100000001))
         print('Calculation result: %d' % s)
         tock = time.time()
         print('Time of %s: %.06f[s]' % (sys._getframe().f_code.co_name, tock-tick))
@@ -58,7 +60,7 @@ NumPyを使い，1から1億が入った配列を用意し，その和を計算�
 
     def test_numpy_sum():
         tick = time.time()
-        a = np.arange(1, 100001, dtype=np.int64)
+        a = np.arange(1, 100000001, dtype=np.int64)
         print('Calculation result: %d' % a.sum())
         tock = time.time()
         print('Time of %s: %.06f[s]' % (sys._getframe().f_code.co_name, tock-tick))
@@ -90,9 +92,9 @@ numpy.whereを用いた条件制御
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 次に，ブロードキャストを利用した高速化の例として，ユニバーサル関数であるnp.whereを用いた例を紹介します．
-科学技術計算をする上で，for文とともに頻出なのが三項演算子（条件文）である”x if condition else y”の処理でしょう．
-numpy.whereはこの三項演算子のベクトル演算版です．
-x, yを配列または数値として，np.where(条件, x, y)のように書きます．
+科学技術計算をする上で，for文とともに頻出なのが三項演算子（条件文）である ``x if condition else y`` の処理でしょう．
+np.whereはこの三項演算子のベクトル演算版です．
+x, yを配列または数値として， ``np.where(条件, x, y)`` のように書きます．
 まずは簡単な例として，真偽値の配列condと２つの配列xarr, yarrを用いて挙動を見てみましょう．
 
 .. code-block:: python
@@ -134,7 +136,7 @@ np.where関数に配列を渡すとき，同じサイズの1つの配列や1つ�
         np.where(cond1, 1, 
             np.where(cond2, 2, 3)))
 
-pythonの処理を高速化するには，ndarrayのユニバーサル関数や演算を用いて可能な限りforループを使わずに基礎的な数値計算を実装することが鍵になります．
+Pythonの処理を高速化するには，ndarrayのユニバーサル関数や演算を用いて可能な限りforループを使わずに基礎的な数値計算を実装することが鍵になります．
 
 
 

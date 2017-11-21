@@ -20,12 +20,3 @@ Welcome to JPFR_NumPy_SciPy's documentation!
    numpy_scipy6
    summary
 
-
-
-
-Indices and tables
-==================
-
-* :ref:`genindex`
-* :ref:`modindex`
-* :ref:`search`

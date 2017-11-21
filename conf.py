@@ -142,7 +142,7 @@ latex_elements = {
 # (source start file, target name, title,
 #  author, documentclass [howto, manual, or own class]).
 latex_documents = [
-    (master_doc, 'JPFR_NumPy_SciPy.tex', 'JPFR\\_NumPy\\_SciPy Documentation',
+    (master_doc, 'JPFR_NumPy_SciPy.tex', 'NumPy/SciPyによるデータ解析',
      'Naoki Kenmochi', 'manual'),
 ]
 
