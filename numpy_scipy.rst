@@ -18,9 +18,13 @@ Pythonコンソールで
 
 .. code-block:: bash
 
-  pip install numpy
+  conda install numpy
 
-  pip install scipy
+  conda install scipy
+
+..  pip install numpy
+
+..  pip install scipy
 
 NumPyのインストールが完了したら，プログラム中で使用するためにimportします．
 外部パッケージの使用に関する詳細は２章を参照してください．
