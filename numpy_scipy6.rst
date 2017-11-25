@@ -1,37 +1,143 @@
-SciPyを用いたPredator-Preyモデルのシミュレーション
-=================================================
+NumPyによる計算高速化
+========================
 
-最後に，シミュレーションの例として，微分方程式を解くことでpredator-preyモデルのシミュレーションについて紹介します．
-帯状流と乱流の相互作用は，捕食者—被食者(Predator-Prey)モデルで記述されることが知られており [PP]_ ，このモデルは１階の連立微分方程式の形をしています．
-SciPyパッケージのodeintモジュールを使うと１階の常微分方程式の数値解を簡単に得ることが出来ます [#]_ ．
-odeintはLSODA(Livermore Solver for Ordinary Differential equations with Automatic switching for stiff and non-stiff problems)法を利用した汎用的な積分器です．
-詳しくはODEPACK Fortran library  [ODE]_ を参照して下さい．
+Pythonは動的型付けを行う（実行時に型を決める言語）インタプリタであるため，柔軟で短いコードが書けたり，短時間で開発ができると言うメリットがあります．
+このメリットだけでも十分かもしれませんが，やはり科学技術計算をしようとするならば高速な計算が望ましいです．
+そこで，この節では高速な科学技術計算のためのテクニックを幾つか紹介します．
 
-プログラムの内容は以下のようになっています．
+数値計算をする上でfor文による多重ループを使いたくなる事があるでしょう．
+しかし，コンパイル言語ではないPythonでは，for文を用いると処理が非常に遅くなります．
+そこで，NumPyの組み込み関数(universal function)を活用します．
+ユニバーサル関数とは，ndarrayの全要素に対して，ブロードキャスティングにより要素ごとに演算処理を行い，結果をndarrayで返す関数です．
+これらの関数はCやFortranで実装されており，かつ線形演算ではBLAS/LAPACKのおかげで，C/C++と遜色のないほど高速で動作します．
 
-#. 解析する関数（この場合predator_prey）を定義する
-    * 第１引数fが微分方程式中の未知関数
-    * 第２引数tが関数のパラメータ（時間に対応）
-    * 第３-6引数a,b,c,dが定数
-    * 戻り値がパラメータtにおける定数a,b,c,dを与える
-#. 微分方程式の初期値f0を与える
-#. 未知関数の解析範囲（時間）を与えるパラメータ列tを用意する
-#. 関数SciPy.integrate.odeintに1, 3, 4を引数にして呼び出す
-#. 戻り値がパラメータtに対応する未知関数fの各値となる
+Pythonのコードで良いパフォーマンスを得るには，以下の事が重要です．
 
-.. プログラムの内容が理解できた所で，計算結果を解釈してみましょう．
+* Pythonのループと条件分岐のロジックを，配列操作と真偽値の配列の操作に変換する
+* 可能なときは必ずブロードキャストする
+* 配列のビュー（スライシング）を用いてデータのコピーを防ぐ
+* ufuncとufuncメソッドを活用する
 
-プラズマ乱流と帯状流の相互作用を当てはめて考えてみると，乱流を餌として発生・成長する帯状流は捕食者の役割を，またプラズマ圧力勾配により発生する線形不安定性を源として成長する乱流は被食者の役割を果たします．
+以下で，for文を使った場合，sum関数を使った場合，NumPyを使った場合の例と，計算速度を例として紹介します．
 
-簡単な例を示しましたが，このようにPythonを用いることで，簡単にモデルの計算と可視化をすることができます．
 
-.. literalinclude:: predator_prey.py
-    :language: python
-    :linenos:
+.. ipython:: python
 
-.. image:: predator_prey.png
+    import time
+    import sys
     
+for文を使って１から１億までの和を計算する（Python的な書き方ではない）
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+.. ipython:: python
     
-.. [PP] S. Kobayashi et al., J. PFR Vol.92, No.3, 2016
-.. [ODE] http://people.sc.fsu.edu/~jburkardt/f77_src/odepack/odepack.html
-.. [#] なお，高階の微分方程式でも，１階の微分方程式に変換することでodeintを用いて計算することができます．
+    def test_for_loop():
+        tick = time.time()
+        s = 0
+        for i in range(1, 100000001):
+            s += i
+        print('Calculation result: %d' % s)
+        tock = time.time()
+        print('Time of %s: %.06f[s]' % (sys._getframe().f_code.co_name, tock-tick))
+
+
+1から1億を返すイテレータを用意し，その和を計算する
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+.. ipython:: python
+    
+    def test_sum():
+        tick = time.time()
+        s = sum(range(1, 100000001))
+        print('Calculation result: %d' % s)
+        tock = time.time()
+        print('Time of %s: %.06f[s]' % (sys._getframe().f_code.co_name, tock-tick))
+
+NumPyを使い，1から1億が入った配列を用意し，その和を計算する
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+.. ipython:: python
+
+    def test_numpy_sum():
+        tick = time.time()
+        a = np.arange(1, 100000001, dtype=np.int64)
+        print('Calculation result: %d' % a.sum())
+        tock = time.time()
+        print('Time of %s: %.06f[s]' % (sys._getframe().f_code.co_name, tock-tick))
+    
+用意した関数を実行して，計算速度を比較してみましょう．
+今回は以下のような環境で実行時間を計測しました．
+
++--------+-----------------------+
+| OS     | macOS 10.12.6         |
++--------+-----------------------+
+| Kernel | Darwin 16.7.0         |
++--------+-----------------------+
+| CPU    | 2.8 GHz Intel Core i7 |
++--------+-----------------------+
+| Python | 3.5.4                 |
++--------+-----------------------+
+| NumPy  | 1.11.3                |
++--------+-----------------------+
+
+.. ipython:: python
+    
+    test_for_loop()
+    test_sum()
+    test_numpy_sum()
+
+このように，numpy.sumを用いると，for文を用いた場合に比べて計算時間を１０分の１以下に抑えることができる場合があります．
+
+numpy.whereを用いた条件制御
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+次に，ブロードキャストを利用した高速化の例として，ユニバーサル関数であるnp.whereを用いた例を紹介します．
+科学技術計算をする上で，for文とともに頻出なのが三項演算子（条件文）である ``x if condition else y`` の処理でしょう．
+np.whereはこの三項演算子のベクトル演算版です．
+x, yを配列または数値として， ``np.where(条件, x, y)`` のように書きます．
+まずは簡単な例として，真偽値の配列condと２つの配列xarr, yarrを用いて挙動を見てみましょう．
+
+.. code-block:: python
+
+    cond = np.array([True, True, False, True, False])
+    xarr = np.array([1.0, 1.1, 1.2, 1.3, 1.4]) 
+    yarr = np.array([2.0, 2.1, 2.2, 2.3, 2.4])
+
+cond, xarr, yarrを上記のように定義します．
+このとき，condの要素がTrueであればxarrの同位置の要素を，Falseであればyarrの同位置の要素を取る処理を考えます．
+これをPythonのリスト内包を用いて書くと次のようになります．
+    
+.. code-block:: python
+
+    result = np.where(cond, xarr, yarr)
+
+np.whereの2番目と3番目の引数（先ほどの例ではxarr, yarr）は，配列でなくスカラー値を取ることもできます．
+np.whereを使う主な場面は，ある配列を基にして別の配列を作るようなときでしょう．
+
+np.where関数に配列を渡すとき，同じサイズの1つの配列や1つのスカラー値を渡す以外にも別の方法があります．
+個々ではその一例を紹介します．
+少し工夫をすると，np.whereで更に複雑なことができます．
+2つの真偽値の配列cond1とcond2があるとします．
+このとき，とりうる真偽の組は4種類あります．
+この種類に応じて，それぞれ別の値を割り当てたいとします．
+この処理をPython標準機能で書くと次のようになります．
+
+.. code-block:: python
+
+    result = []
+    for i in range(n):
+        result.append(0)
+
+これをnp.whereを使って書くと次のようになります.
+   
+.. code-block:: python
+
+    np.where(cond1 & cond2, 0,
+        np.where(cond1, 1, 
+            np.where(cond2, 2, 3)))
+
+Pythonの処理を高速化するには，ndarrayのユニバーサル関数や演算を用いて可能な限りforループを使わずに基礎的な数値計算を実装することが鍵になります．
+
+
+
+
