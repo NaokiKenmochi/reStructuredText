@@ -36,10 +36,10 @@ numpy.ones
 np.onesを用いることで，1で埋められた指定した形状(shape)をもつ配列を生成できます．
 それ以外はnp.zerosと同様です．
 
-.. ipython:: python
-    
-    np.ones(5)
-    np.ones((2, 3))
+.. .. ipython:: python
+..     
+..     np.ones(5)
+..     np.ones((2, 3))
 
 numpy.arange
 --------------------
@@ -83,7 +83,7 @@ N×Nの単位行列を生成するには，np.eye, np.identityを用います．
 .. ipython:: python
 
     np.eye(3)   #3×3の単位行列を生成
-    np.identity(5)  #5×5の単位行列を生成
+..    np.identity(5)  #5×5の単位行列を生成
 
 配列の廃棄（ガベージコレクション）
 =======================================
