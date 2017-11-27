@@ -66,15 +66,15 @@ NumPyにもlinalgがありますが，SciPyのlinalgはこの機能をほとん�
 .. image:: broadcast2.png
     :alt: IMAGE
 
-.. ipython:: python
-
-    #1から4までの等差数列を作成し，形状を(4, 1)に変更する
-    d = np.array([1, 2, 3, 4]).reshape(4, 1)
-
-    d + c
-
-.. image:: broadcast3.png
-    :alt: IMAGE
+.. .. ipython:: python
+.. 
+..     #1から4までの等差数列を作成し，形状を(4, 1)に変更する
+..     d = np.array([1, 2, 3, 4]).reshape(4, 1)
+.. 
+..     d + c
+.. 
+.. .. image:: broadcast3.png
+..     :alt: IMAGE
 
 .. ipython:: python
 
