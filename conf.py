@@ -46,7 +46,7 @@ source_suffix = '.rst'
 master_doc = 'index'
 
 # General information about the project.
-project = 'JPFR_NumPy_SciPy'
+project = 'NumPy/SciPyによるデータ解析'
 copyright = '2017, Naoki Kenmochi'
 author = 'Naoki Kenmochi'
 
