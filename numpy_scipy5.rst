@@ -1,27 +1,10 @@
 配列の演算
 ==================================
 それでは，用意した配列に対して演算処理を行いましょう．
-NumPyではndarrayで表現した行列に対して，行列の積，行列の和，逆行列の計算，行列式の計算，固有値計算などさまざまな計算を行うメソッドや関数が用意されています．
+NumPyではndarrayで表現した行列に対して，行列の和・積，逆行列の計算，行列式の計算，固有値計算などさまざまな計算を行うメソッドや関数が用意されています．
 行列計算では，ndarrayの ``+`` （和）， ``-`` （差）， ``*`` （積）， ``/`` （除算）， ``**`` （べき乗）， ``//`` （打ち切り除算）， ``%`` （剰余）は要素同士の計算になるという点に注意が必要です．
 行列積を計算するには， ``dot`` メソッドを使うか， ``@`` 演算子（Python3.5以上かつNumPy1.10以上）を使う必要があります．
 
-さらに，SciPyを使うとより高度な行列演算ができます．
-これには，線形代数分野の各種関数を提供するlinalgサブパッケージを用います．
-NumPyにもlinalgがありますが，SciPyのlinalgはこの機能をほとんどカバーし，かつそれ以外にも多くの機能を追加しています [#]_ ．
-ここでは，そのうち一部を紹介します [#]_ ．
-
-.. ipython:: python
-
-    from scipy import linalg    #SciPyのlinalgサブパッケージをインポートする
-    import numpy as np
-
-    array = np.array([[1, 2], [3, 4]])
-    inv_array = linalg.inv(array)   #逆行列の計算
-    inv_array
-    det_array = linalg.det(array)   #行列式の計算
-    det_array
-    norm_array = linalg.norm(array) #ノルムの計算
-    norm_array
 
 ブロードキャスティング
 ------------------------
@@ -89,6 +72,27 @@ NumPyにもlinalgがありますが，SciPyのlinalgはこの機能をほとん�
 
 .. image:: broadcast4.png
     :alt: IMAGE
+
+SciPyによる行列演算
+------------------------------
+
+さらに，SciPyを使うとより高度な行列演算ができます．
+これには，線形代数分野の各種関数を提供するlinalgサブパッケージを用います．
+NumPyにもlinalgがありますが，SciPyのlinalgはこの機能をほとんどカバーし，かつそれ以外にも多くの機能を追加しています [#]_ ．
+ここでは，そのうち一部を紹介します [#]_ ．
+
+.. ipython:: python
+
+    from scipy import linalg    #SciPyのlinalgサブパッケージをインポートする
+    import numpy as np
+
+    array = np.array([[1, 2], [3, 4]])
+    inv_array = linalg.inv(array)   #逆行列の計算
+    inv_array
+    det_array = linalg.det(array)   #行列式の計算
+    det_array
+    norm_array = linalg.norm(array) #ノルムの計算
+    norm_array
 
 .. [#] SciPyのlinalgでは，逆行列計算や線形方程式を解くための関数に加え，固有値計算，行列の分解，行列の各種計算関数（行列の対数計算など），特殊行列関数などが提供されています．
 
