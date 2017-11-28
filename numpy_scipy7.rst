@@ -1,29 +1,30 @@
 SciPyを用いたPredator-Preyモデルのシミュレーション
 =================================================
 
-最後に，シミュレーションの例として，微分方程式を解くことでpredator-preyモデルのシミュレーションについて紹介します．
+最後に，微分方程式を解くことでpredator-preyモデルのシミュレーションについて紹介します．
 帯状流と乱流の相互作用は，捕食者—被食者(Predator-Prey)モデルで記述されることが知られており [PP]_ ，このモデルは１階の連立微分方程式の形をしています．
 SciPyパッケージのodeintモジュールを使うと１階の常微分方程式の数値解を簡単に得ることが出来ます [#]_ ．
-odeintはLSODA(Livermore Solver for Ordinary Differential equations with Automatic switching for stiff and non-stiff problems)法を利用した汎用的な積分器です．
+odeintはLSODA(Livermore Solver for Ordinary Differential equations with Automatic switching for stiff and non-stiff problems)法を利用した汎用的な積分器ですが，
 詳しくはODEPACK Fortran library  [ODE]_ を参照して下さい．
 
-プログラムの内容は以下のようになっています．
+プログラムは本章末に載せておきますが，内容は以下のようになっています．
 
 #. 解析する関数（この場合predator_prey）を定義する
-    * 第１引数fが微分方程式中の未知関数
-    * 第２引数tが関数のパラメータ（時間に対応）
-    * 第３-6引数a,b,c,dが定数
-    * 戻り値がパラメータtにおける定数a,b,c,dを与える
+    * 第1引数fが微分方程式中の未知関数
+    * 第2引数tが関数のパラメータ（時間に対応）
+    * 第3 \- 6引数a, b, c, dが定数
+    * 戻り値がパラメータtにおけるdx/dt, dy/dtを与える
 #. 微分方程式の初期値f0を与える
 #. 未知関数の解析範囲（時間）を与えるパラメータ列tを用意する
-#. 関数SciPy.integrate.odeintに1, 3, 4を引数にして呼び出す
+#. 関数SciPy.integrate.odeintに1, 2, 3を引数にして呼び出す
 #. 戻り値がパラメータtに対応する未知関数fの各値となる
 
 .. プログラムの内容が理解できた所で，計算結果を解釈してみましょう．
 
 プラズマ乱流と帯状流の相互作用を当てはめて考えてみると，乱流を餌として発生・成長する帯状流は捕食者の役割を，またプラズマ圧力勾配により発生する線形不安定性を源として成長する乱流は被食者の役割を果たします．
 
-簡単な例を示しましたが，このようにPythonを用いることで，簡単にモデルの計算と可視化をすることができます．
+このようにPythonを用いることで，簡単にモデルの計算と可視化をすることができます．
+コーディングの時間を短縮し，試行錯誤に多くの時間を割けるのがPythonの利点でもありますので，みなさんもまずは手を動かしてプログラムを作成し，Pythonのスピード感を体感してみて下さい．
 
 .. literalinclude:: predator_prey.py
     :language: python
