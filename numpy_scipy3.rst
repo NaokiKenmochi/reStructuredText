@@ -5,7 +5,7 @@ NumPyではファイル形式にバイナリとテキストを選び，ファイ
 
 バイナリ形式での読み書き
 --------------------------
-バイナリ形式の読み書きには，np.load, np.save, np.savezを使い，以下のような特徴があります．
+バイナリ形式の読み書きには，np.load, np.save, np.savez, np.savez_compressedを使い，以下のような特徴があります．
 
 * ndarray配列をそのまま保存できる．３次元以上の配列も保存可能
 * 対応拡張子はpickle, npz, npy
@@ -13,7 +13,7 @@ NumPyではファイル形式にバイナリとテキストを選び，ファイ
 
 それぞれについて，例とともに簡単な使い方を紹介していきます．
 
-numpy.save, numpy.save
+numpy.save, numpy.load
 ^^^^^^^^^^^^^^^^^^^^^^^^^^
 np.saveとnp.loadは効率的にndarrayを読み書きできます．
 デフォルト設定では非圧縮のバイナリ形式で保存され，拡張子は.npyになります．
@@ -30,10 +30,12 @@ np.saveとnp.loadは効率的にndarrayを読み書きできます．
 
     np.load('array.npy')
 
-numpy.savez
+numpy.savez, numpy.savez_compressed
 ^^^^^^^^^^^^^^^^^^^^^^^^^
-np.savezは，複数のndarrayをzip圧縮して保存することができます．
-個々のndarrayはキーワードを指定して区別します．
+np.savezは，複数のndarrayを非圧縮のzip形式で保存することができます．
+一方，np.savez_compressedは，複数のndarrayを ``zipfile.ZIP_DEFLATE``　により圧縮されたzip形式で保存することができます．
+両者ともに，個々のndarrayはキーワードを指定して区別します．
+なお，読み込みはともにnp.loadにより行うことができます．
 
 .. ipython:: python
 
