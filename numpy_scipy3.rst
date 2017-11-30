@@ -31,9 +31,9 @@ np.saveとnp.loadは効率的にndarrayを読み書きできます．
     np.load('array.npy')
 
 numpy.savez, numpy.savez_compressed
-^^^^^^^^^^^^^^^^^^^^^^^^^
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 np.savezは，複数のndarrayを非圧縮のzip形式で保存することができます．
-一方，np.savez_compressedは，複数のndarrayを ``zipfile.ZIP_DEFLATE``　により圧縮されたzip形式で保存することができます．
+一方，np.savez_compressedは，複数のndarrayを ``zipfile.ZIP_DEFLATE`` により圧縮されたzip形式で保存することができます．
 両者ともに，個々のndarrayはキーワードを指定して区別します．
 なお，読み込みはともにnp.loadにより行うことができます．
 
