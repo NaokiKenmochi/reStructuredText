@@ -81,4 +81,4 @@ SciPyのDocstringの冒頭には，「SciPyはNumPyの名前空間から全て�
 .. [WM] Wes McKinney: 「Pythonによるデータ分析入門」（オライリー・ジャパン，2013）
 .. [KN] 中久喜健司:　「科学技術計算のためのPython入門」（技術評論社，2016）
 
-.. [#] たとえばscipy.linalgのヘルプを表示させたい場合は，IPythonなどで ``scipy.linalg?`` と入力すればヘルプを参照することができます．
+.. [#] たとえばscipy.linalgのヘルプを表示させたい場合は，IPythonなどで ``>>> scipy.linalg?`` と入力すればヘルプを参照することができます．
