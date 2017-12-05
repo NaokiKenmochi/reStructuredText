@@ -33,9 +33,8 @@ np.saveとnp.loadは効率的にndarrayを読み書きできます．
 numpy.savez, numpy.savez_compressed
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 np.savezは，複数のndarrayを非圧縮のzip形式で保存することができます．
-一方，np.savez_compressedは，複数のndarrayを ``zipfile.ZIP_DEFLATE`` により圧縮されたzip形式で保存することができます．
+更に，np.savez_compressedを用いることで，複数のndarrayを ``zipfile.ZIP_DEFLATE`` により圧縮されたzip形式で保存することができます．
 両者ともに，個々のndarrayはキーワードを指定して区別します．
-なお，読み込みはともにnp.loadにより行うことができます．
 
 .. ipython:: python
 
@@ -44,16 +43,17 @@ np.savezは，複数のndarrayを非圧縮のzip形式で保存することが�
 
 拡張子.npzのファイルはnp.loadで読み込みます．
 ndarrayを読み込むには，キーワードを指定します．
-なお，この読み込みは遅延読み込みであり，データは参照された時点で初めてロードされます．
 
 .. ipython:: python
 
     arr = np.load('array2.npz')
     arr['b2']
 
+なお，この読み込みは遅延読み込みであり，データは参照された時点で初めてロードされます．
+
 テキスト形式での読み書き
 -------------------------
-Python以外の言語や，その他のソフトウェアで使用する場合など，テキスト形式での保存が便利です．
+Python以外の言語やその他のソフトウェアで使用する場合など，テキスト形式での保存が便利です．
 NumPyではテキスト形式での読み書きにnp.loadtxt, np.savetxtを使用します．
 
 numpy.loadtxt, numpy.savetxt関数の特徴
@@ -93,7 +93,7 @@ numpy.loadtxt, numpy.savetxt関数の特徴
 .. include:: array3.txt
 
 こちらは，区切り文字を指定していないので，デフォルト設定のスペースでデータが区切られています．
-なお，「,」で区切ったテキストファイルを読み込むには ``delimiter=','`` と指定しないといけません．
+なお，「,」で区切ったテキストファイルを読み込むには ``delimiter=','`` と指定します．
 
 .. ipython:: python
     
@@ -101,7 +101,7 @@ numpy.loadtxt, numpy.savetxt関数の特徴
     e
 
 .. genfromtxtはデータファイルに数値と文字列の両方が入っている場合に利用すると便利です．
-以下にNumPyを用いたファイル入出力を表にまとめておきます．
+以下にNumPyを用いたファイル読み書きの方法を表にまとめておきます．
 
 +------------------+----------+--------+--------+--------------+
 | 読み込み         | 書き込み | 形式   | 拡張子 | 備考         |
