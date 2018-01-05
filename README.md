@@ -4,11 +4,6 @@
 
 ## コンテンツ
 + [はじめに](introduction.rst)
-+ [NumPy/SciPyの利用](numpy_scipy.rst)
-+ [配列の生成](numpy_scipy2.rst)
-+ [ファイルの読み書き](numpy_scipy3.rst)
-+ [要素・行・列の取り出し](numpy_scipy4.rst)
-+ [配列の演算](numpy_scipy5.rst)
-+ [NumPyによる計算高速化](numpy_scipy6.rst)
++ [NumPy/SciPyを用いた実験データ解析](numpy_scipy.rst)
 + [SciPyを用いたPredator-Preyモデルのシミュレーション](numpy_scipy7.rst)
 + [まとめ](summary.rst)
