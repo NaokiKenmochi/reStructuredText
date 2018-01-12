@@ -36,6 +36,6 @@ odeintはLSODA(Livermore Solver for Ordinary Differential equations with Automat
 .. image:: predator_prey.png
     
     
-.. [PP] S. Kobayashi et al., J. PFR Vol.92, No.3, 2016
+.. [PP] S.Kobayashi et al., J. PFR Vol.92, No.3, 2016
 .. [ODE] http://people.sc.fsu.edu/~jburkardt/f77_src/odepack/odepack.html
 .. [#] なお，高階の微分方程式でも，１階の微分方程式に変換することでodeintを用いて計算することができます．
