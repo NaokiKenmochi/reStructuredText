@@ -25,7 +25,7 @@ odeintはLSODA(Livermore Solver for Ordinary Differential equations with Automat
 #. 微分方程式の定数a, b, c, dを与える
 #. 微分方程式の初期値f0を与える
 #. 未知関数の解析範囲(時間)を与えるパラメータ列tを用意する
-#. 関数SciPy.integrate.odeintに1 \- 4を引数にして呼び出す
+#. 関数 ``SciPy.integrate.odeint`` に1 \- 4を引数にして呼び出す
 #. 戻り値がパラメータtに対応する未知関数fの各値となる
 
 .. プログラムの内容が理解できた所で，計算結果を解釈してみましょう．
