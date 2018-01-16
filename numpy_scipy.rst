@@ -198,8 +198,8 @@ SciPyを用いたデータ解析
     
     import scipy.signal as sig
     f, t, Pxx = sig.spectrogram(IF[:, 0], fs=1/sampling_time, window='hamming', nperseg=250)
-    plt.pcolormesh(t, f, np.abs(Pxx), vmin=0, vmax=1e-2)
-    plt.xlim(1.0, 2.0)
+    plt.pcolormesh(t+0.5, f, np.abs(Pxx), vmin=0, vmax=1e-2)
+    plt.xlim(1.5, 2.5)
     plt.xlabel('Time [sec]')
     plt.ylabel('Frequency [Hz]')
     plt.show()
