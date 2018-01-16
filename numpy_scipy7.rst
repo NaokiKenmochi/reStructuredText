@@ -7,7 +7,15 @@ SciPyパッケージのodeintモジュールを使うと１階の常微分方程
 odeintはLSODA(Livermore Solver for Ordinary Differential equations with Automatic switching for stiff and non-stiff problems)法を利用した汎用的な積分器ですが，
 詳しくはODEPACK Fortran library  [ODE]_ を参照して下さい．
 
-プログラムは本章末に載せておきますが，内容は以下のようになっています．
+それでは，ソースコードを見てみましょう．
+
+.. literalinclude:: predator_prey.py
+    :language: python
+    :linenos:
+
+.. image:: predator_prey.png
+    
+プログラムの内容は以下のようになっています．
 
 #. 解析する関数（この場合predator_prey）を定義する
     * 第1引数fが微分方程式中の未知関数
@@ -29,13 +37,6 @@ odeintはLSODA(Livermore Solver for Ordinary Differential equations with Automat
 
 .. Pythonのスピード感を体感してみて下さい．
 
-.. literalinclude:: predator_prey.py
-    :language: python
-    :linenos:
-
-.. image:: predator_prey.png
-    
-    
 .. [PP] S.Kobayashi et al., J. PFR Vol.92, No.3, 2016
 .. [ODE] http://people.sc.fsu.edu/~jburkardt/f77_src/odepack/odepack.html
 .. [#] なお，高階の微分方程式でも，１階の微分方程式に変換することでodeintを用いて計算することができます．
