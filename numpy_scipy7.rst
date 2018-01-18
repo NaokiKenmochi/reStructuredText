@@ -1,13 +1,14 @@
 SciPyを用いたPredator-Preyモデルのシミュレーション
 =================================================
 
-最後に，SciPyを用いた微分方程式の解法例として，predator-preyモデルのシミュレーションについて紹介します．
+本章の最後に，SciPyを用いた微分方程式の解法例として，predator-preyモデルのシミュレーションについて紹介します．
+
 帯状流と乱流の相互作用は，捕食者—被食者(Predator-Prey)モデルで記述されることが知られており [PP]_ ，このモデルは１階の連立微分方程式の形をしています．
 SciPyパッケージのodeintモジュールを使うと１階の常微分方程式の数値解を簡単に得ることが出来ます [#]_ ．
 odeintはLSODA(Livermore Solver for Ordinary Differential equations with Automatic switching for stiff and non-stiff problems)法を利用した汎用的な積分器ですが，
 詳しくはODEPACK Fortran library  [ODE]_ を参照して下さい．
 
-それでは，ソースコードを見てみましょう．
+まずは，ソースコードを見てみましょう．
 
 .. literalinclude:: predator_prey.py
     :language: python
